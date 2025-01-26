@@ -5,10 +5,10 @@
 
 <head>
   <title>Index</title>
-  <link rel="shortcut icon" type="png" href="favicon.ico">
+  <link rel="shortcut icon" type="png" href="../favicon.ico">
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="../index.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -40,27 +40,26 @@
 
 <div class="container">
   <div class="center">
+    <button class="changeStateInContractEvent btn buttonHighContrast">set(uint256 x)</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="center">
     <input type="text" style="text-align:center" id="setValueSmartContract" placeholder="input uint value">
   </div>
 </div>
 
-<div class="container">
-  <div class="center">
-    <button class="changeStateInContractEvent btn buttonUniswapColorTheme">Swap</button>
-  </div>
-</div>
-
-
 <div style="min-height: 5vh"> </div>
 
 <div class="container">
-  <div class="center">
-    <form action="html/poolCreate.html">
-      <input type="submit" class="btn buttonHighContrast" value="Pool" />
-    </form>
-  </div> 
-</div>
-  
+    <div class="center">
+      <form action="poolAddRemove.html">
+        <input type="submit" class="btn buttonHighContrast" value="Pool Add Remove" />
+      </form>
+    </div> 
+</div>  
+
 <div class="container">
   <div class="center">
     <form action="https://github.com/MarcusWentz/Web3_Get_Set_Contract_Metamask">
@@ -68,12 +67,12 @@
     </form>
   </div> 
 </div>
-
+  
   <!-- ethers.js library import -->
   <!-- <script src="https://cdn.ethers.io/lib/ethers-5.6.umd.min.js" type="text/javascript"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.6.0/ethers.umd.min.js" type="text/javascript"></script>
     <!-- Javascript for this page source -->
-  <script src="index.js"></script>
+  <script src="../javascript/pool.js"></script>
 
 </body>
 
