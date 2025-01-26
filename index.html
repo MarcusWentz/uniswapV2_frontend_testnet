@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+  <title>Index</title>
+  <link rel="shortcut icon" type="png" href="favicon.ico">
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <link rel="stylesheet" href="index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="background-color:black;">
+
+<div style="min-height: 5vh"></div>
+
+<div class="container">
+  <div class="center">
+    <button class="btn buttonConnectMetamask" id=enableEthereumButton></button>
+  </div>
+</div>
+
+<div style="min-height: 5vh"> </div>
+
+<div class="container">
+  <div class="center">
+    <p style="color:white">storedData(): </p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="center">
+    <p style="color:white" id="getValueStateSmartContract"></p>
+  </div>
+</div>
+
+<div style="min-height: 5vh"> </div>
+
+<div class="container">
+  <div class="center">
+    <button class="changeStateInContractEvent btn buttonHighContrast">set(uint256 x)</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="center">
+    <input type="text" style="text-align:center" id="setValueSmartContract" placeholder="input uint value">
+  </div>
+</div>
+
+<div style="min-height: 5vh"> </div>
+
+<div class="container">
+  <div class="center">
+    <form action="https://github.com/MarcusWentz/Web3_Get_Set_Contract_Metamask">
+      <input type="submit" class="btn buttonHighContrast" value="GitHub" />
+    </form>
+  </div> 
+</div>
+  
+  <!-- ethers.js library import -->
+  <!-- <script src="https://cdn.ethers.io/lib/ethers-5.6.umd.min.js" type="text/javascript"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.6.0/ethers.umd.min.js" type="text/javascript"></script>
+    <!-- Javascript for this page source -->
+  <script src="index.js"></script>
+
+</body>
+
+</html>
