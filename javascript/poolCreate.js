@@ -14,7 +14,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum); //Imported 
 // const signer = provider.getSigner(); //Do this when the user clicks "enableEthereumButton" which will call getAccount() to get the signer private key for the provider.  
  
 const contractAddress_JS = '0xAEC91b299dC7B7001E32112f2A72a3a51f3b9303'
-const contractABI_JS = [{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"}],"name":"createPair","outputs":[{"internalType":"address","name":"pair","type":"address"}],"stateMutability":"nonpayable","type":"function"}]
+const contractABI_JS = [{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allPairs","outputs":[{"internalType":"address","name":"pair","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"allPairsLength","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"}],"name":"createPair","outputs":[{"internalType":"address","name":"pair","type":"address"}],"stateMutability":"nonpayable","type":"function"}]
 
 const contractDefined_JS = new ethers.Contract(contractAddress_JS, contractABI_JS, provider);
 
@@ -36,7 +36,7 @@ async function getDataOnChainToLoad(){
 }
 
 async function getStoredData() {
-  let storedDataCallValue = await contractDefined_JS.storedData()
+  let storedDataCallValue = await contractDefined_JS.allPairsLength()
   if(storedDataCallValue === undefined){
     document.getElementById("getValueStateSmartContract").innerHTML =  "Install Metamask and select Sepolia Testnet to have a Web3 provider to read blockchain data."
   }
@@ -66,11 +66,11 @@ async function sentTxAsync(x) {
     
 }
 
-contractDefined_JS.on("setEvent", () => {
+// contractDefined_JS.on("setEvent", () => {
 
-  getStoredData()
+//   getStoredData()
 
-});
+// });
 
 //Connect to Metamask.
 const ethereumButton = document.querySelector('#enableEthereumButton');
