@@ -54,9 +54,9 @@ async function getStoredData() {
   }
 }
 
-async function sentTxAsync(x) {
+async function sentTxAsync(addressTokenA,addressTokenB) {
 
-  const callDataObject = await contractDefined_JS.populateTransaction.set(x);
+  const callDataObject = await contractDefined_JS.populateTransaction.createPair(addressTokenA,addressTokenB);
   const txData = callDataObject.data;
 
   ethereum
@@ -93,19 +93,10 @@ const changeStateInContractEvent = document.querySelector('.changeStateInContrac
 changeStateInContractEvent.addEventListener('click', () => {
   checkAddressMissingMetamask()
   
-  var inputContractText = document.getElementById("setValueSmartContract").value.toString();
+  var valueAddressTokenA = document.getElementById("addressTokenA").value.toString();
+  var valueAddressTokenB = document.getElementById("addressTokenB").value.toString();
 
-  if(/^\d+$/.test(inputContractText)==false) {
-    alert("Can only accept numeric characters.")
-    return
-  }
-
-  if(BigInt(inputContractText) > (BigInt(2**256)-BigInt(1)) ) {
-    alert("Value is larger than uin256 max value ((2^256)-1).")
-    return
-  }
-
-  sentTxAsync(inputContractText)
+  sentTxAsync(valueAddressTokenA,valueAddressTokenB)
 
 })
 
