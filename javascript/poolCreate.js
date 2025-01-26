@@ -6,6 +6,7 @@ detectMetamaskInstalled() //When the page is opened check for error handling iss
 let accounts = []; ////Empty array to be filled once Metamask is called.
 document.getElementById("enableEthereumButton").innerHTML =  "Connect Metamask 🦊"
 document.getElementById("getAllPairsLength").innerHTML =  "Loading..."
+document.getElementById("getAllPairsIndexZero").innerHTML =  "Loading..."
 
 const baseSepoliaChainId = 84532;
 
@@ -31,17 +32,25 @@ async function getDataOnChainToLoad(){
   }
   if(chainIdConnected != baseSepoliaChainId){
     document.getElementById("getAllPairsLength").innerHTML =  "Install Metamask and select Base Sepolia Testnet to have a Web3 provider to read blockchain data."
+    document.getElementById("getAllPairsIndexZero").innerHTML =  "Install Metamask and select Base Sepolia Testnet to have a Web3 provider to read blockchain data."
   }
-
+  
 }
 
 async function getStoredData() {
-  let storedDataCallValue = await contractDefined_JS.allPairsLength()
-  if(storedDataCallValue === undefined){
+  let getAllPairsLengthValue = await contractDefined_JS.allPairsLength()
+  if(getAllPairsLengthValue === undefined){
     document.getElementById("getAllPairsLength").innerHTML =  "Install Metamask and select Sepolia Testnet to have a Web3 provider to read blockchain data."
   }
   else{
-    document.getElementById("getAllPairsLength").innerHTML =  storedDataCallValue
+    document.getElementById("getAllPairsLength").innerHTML =  getAllPairsLengthValue
+  }
+  let getPairIndexZeroAddress = await contractDefined_JS.allPairs(0)
+  if(getPairIndexZeroAddress === undefined){
+    document.getElementById("getAllPairsIndexZero").innerHTML =  "Install Metamask and select Sepolia Testnet to have a Web3 provider to read blockchain data."
+  }
+  else{
+    document.getElementById("getAllPairsIndexZero").innerHTML =  getPairIndexZeroAddress
   }
 }
 
@@ -108,7 +117,7 @@ function detectMetamaskInstalled(){
   catch(missingMetamask) {
      alert("Metamask not detected in browser! Install Metamask browser extension, then refresh page!")
      document.getElementById("getAllPairsLength").innerHTML =  "Install Metamask and select Sepolia Testnet to have a Web3 provider to read blockchain data."
-
+     document.getElementById("getAllPairsIndexZero").innerHTML =  "Install Metamask and select Base Sepolia Testnet to have a Web3 provider to read blockchain data."
   }
 
 }
