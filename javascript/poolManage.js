@@ -36,18 +36,28 @@ async function getDataOnChainToLoad(){
 }
 
 async function getStoredData() {
-  let storedDataCallValue = await contractDefined_JS.storedData()
-  if(storedDataCallValue === undefined){
-    document.getElementById("getValueStateSmartContract").innerHTML =  "Install Metamask and select Sepolia Testnet to have a Web3 provider to read blockchain data."
-  }
-  else{
-    document.getElementById("getValueStateSmartContract").innerHTML =  storedDataCallValue
-  }
+  // let storedDataCallValue = await contractDefined_JS.storedData()
+  // if(storedDataCallValue === undefined){
+  //   document.getElementById("getValueStateSmartContract").innerHTML =  "Install Metamask and select Sepolia Testnet to have a Web3 provider to read blockchain data."
+  // }
+  // else{
+  //   document.getElementById("getValueStateSmartContract").innerHTML =  storedDataCallValue
+  // }
 }
 
-async function sentTxAsync(x) {
+async function sentTxAsync() {
 
-  const callDataObject = await contractDefined_JS.populateTransaction.set(x);
+  let tokenERC20Address = "0xE4aB69C077896252FAFBD49EFD26B5D171A32410";
+  const deadline = BigInt("115792089237316195423570985008687907853269984665640564039457584007913129639935");
+
+  const callDataObject = await contractDefined_JS.populateTransaction.addLiquidityETH(
+		tokenERC20Address,
+    ethers.utils.hexlify(BigInt("2000")),
+    ethers.utils.hexlify(BigInt("1000")),
+    ethers.utils.hexlify(BigInt("1000")),
+		accounts[0],
+    ethers.utils.hexlify(deadline), 
+	);
   const txData = callDataObject.data;
 
   ethereum
@@ -57,7 +67,8 @@ async function sentTxAsync(x) {
       {
         from: accounts[0],
         to: contractAddress_JS,
-        data: txData
+        data: txData,
+        value: ethers.utils.hexlify(BigInt("2000")),
       },
     ],
   })
@@ -66,11 +77,11 @@ async function sentTxAsync(x) {
     
 }
 
-contractDefined_JS.on("setEvent", () => {
+// contractDefined_JS.on("setEvent", () => {
 
-  getStoredData()
+//   getStoredData()
 
-});
+// });
 
 //Connect to Metamask.
 const ethereumButton = document.querySelector('#enableEthereumButton');
@@ -84,19 +95,7 @@ const changeStateInContractEvent = document.querySelector('.changeStateInContrac
 changeStateInContractEvent.addEventListener('click', () => {
   checkAddressMissingMetamask()
   
-  var inputContractText = document.getElementById("setValueSmartContract").value.toString();
-
-  if(/^\d+$/.test(inputContractText)==false) {
-    alert("Can only accept numeric characters.")
-    return
-  }
-
-  if(BigInt(inputContractText) > (BigInt(2**256)-BigInt(1)) ) {
-    alert("Value is larger than uin256 max value ((2^256)-1).")
-    return
-  }
-
-  sentTxAsync(inputContractText)
+  sentTxAsync()
 
 })
 

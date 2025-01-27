@@ -70,6 +70,30 @@
     font-size: 16px;
 }
 
+.buttonAddLiquidityGreen {
+    background-color: #000000;
+    color: #03c019;
+    border-style: solid;
+    border-color: #03c019;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.buttonAddLiquidityGreen:hover {
+    background-color: #03c019;
+    color: #000000;
+    border-style: solid;
+    border-color: #03c019;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 .container {
     position: relative;
     padding: 30px;
