@@ -63,7 +63,7 @@ async function getGetAmountsOut(msgValueInput,swapPath) {
 	return storedData
 }
 
-async function sentTxAsync() {
+async function swapEthForTokenTxAsync() {
 
   let wrappedTokenAddress = await getWrappedTokenAddress()
 	console.log("wrappedTokenAddress: " + wrappedTokenAddress)
@@ -111,6 +111,57 @@ async function sentTxAsync() {
     
 }
 
+async function swapTokenForEthTxAsync() {
+
+  let wrappedTokenAddress = await getWrappedTokenAddress()
+	console.log("wrappedTokenAddress: " + wrappedTokenAddress)
+
+	let factoryAddress = await getFactoryAddress()
+	console.log("factoryAddress: " + factoryAddress)
+
+	// let approvalERC20 = await getApprovalERC20()
+	// console.log("approvalERC20: " + approvalERC20)
+
+	const tokenIn = tokenERC20Address;
+	const tokenOut = wrappedTokenAddress;
+	const swapPath = [tokenIn,tokenOut];
+	console.log("swapPath: ", swapPath);
+
+	let tokenERC20Input = 1041;
+	let getAmountsOutReturnArray = await getGetAmountsOut(tokenERC20Input,swapPath);
+	let amountOut = getAmountsOutReturnArray[1];
+	console.log("amountIn getAmountsOutReturnArray[0]: "  + getAmountsOutReturnArray[0])
+	console.log("amountOut getAmountsOutReturnArray[1]: " + amountOut)
+
+  const deadline = BigInt("115792089237316195423570985008687907853269984665640564039457584007913129639935");
+
+  const callDataObject = await contractDefined_JS.populateTransaction.swapExactTokensForETH(
+		ethers.utils.hexlify(tokenERC20Input),
+		ethers.utils.hexlify(amountOut),
+		swapPath,
+		accounts[0],
+    ethers.utils.hexlify(deadline), 
+  ); 
+
+  ;
+  const txData = callDataObject.data;
+
+  ethereum
+  .request({
+    method: 'eth_sendTransaction',
+    params: [
+      {
+        from: accounts[0],
+        to: contractAddress_JS,
+        data: txData,
+       },
+    ],
+  })
+  .then((txHash) => console.log(txHash))
+  .catch((error) => console.error);  
+    
+}
+
 // contractDefined_JS.on("setEvent", () => {
 
 //   getStoredData()
@@ -125,11 +176,20 @@ ethereumButton.addEventListener('click', () => {
 });
 
 // MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
+const swapEthForTokenContractEvent = document.querySelector('.swapEthForTokenContractEvent');
+swapEthForTokenContractEvent.addEventListener('click', () => {
+  checkAddressMissingMetamask()
+  
+  swapEthForTokenTxAsync()
+
+})
+
+// MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
 const changeStateInContractEvent = document.querySelector('.changeStateInContractEvent');
 changeStateInContractEvent.addEventListener('click', () => {
   checkAddressMissingMetamask()
   
-  sentTxAsync()
+  swapTokenForEthTxAsync()
 
 })
 
