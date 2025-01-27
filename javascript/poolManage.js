@@ -5,7 +5,8 @@ detectMetamaskInstalled() //When the page is opened check for error handling iss
 
 let accounts = []; ////Empty array to be filled once Metamask is called.
 document.getElementById("enableEthereumButton").innerHTML =  "Connect Metamask 🦊"
-document.getElementById("getValueStateSmartContract").innerHTML =  "Loading..."
+document.getElementById("getPoolBalanceWETH").innerHTML =  "Loading..."
+document.getElementById("getPoolBalanceLINK").innerHTML =  "Loading..."
 
 const baseSepoliaChainId = 84532;
 
@@ -18,8 +19,14 @@ const contractABI_JS = [{"inputs":[{"internalType":"address","name":"token","typ
 
 const contractDefined_JS = new ethers.Contract(contractAddress_JS, contractABI_JS, provider);
 
-// const contractDefined_JS = new ethers.Contract(contractAddress_JS, contractABI_JS, signer);
+const wethAddress = '0x4200000000000000000000000000000000000006'
+const linkAddress = '0xE4aB69C077896252FAFBD49EFD26B5D171A32410'
+const ierc20Abi = [{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
 
+const wethContractInstance = new ethers.Contract(wethAddress, ierc20Abi, provider);
+const linkContractInstance = new ethers.Contract(linkAddress, ierc20Abi, provider);
+
+const poolPairAddressLinkWeth = "0xC9ae620655690E6334C412a74ecf30DF85FD8458";
 
 getDataOnChainToLoad()
 
@@ -30,19 +37,27 @@ async function getDataOnChainToLoad(){
     getStoredData()
   }
   if(chainIdConnected != baseSepoliaChainId){
-    document.getElementById("getValueStateSmartContract").innerHTML =  "Install Metamask and select Base Sepolia Testnet to have a Web3 provider to read blockchain data."
+    document.getElementById("getPoolBalanceWETH").innerHTML =  "Install Metamask and select Base Sepolia Testnet to have a Web3 provider to read blockchain data."
+    document.getElementById("getPoolBalanceLINK").innerHTML =  "Install Metamask and select Base Sepolia Testnet to have a Web3 provider to read blockchain data."
   }
 
 }
 
 async function getStoredData() {
-  // let storedDataCallValue = await contractDefined_JS.storedData()
-  // if(storedDataCallValue === undefined){
-  //   document.getElementById("getValueStateSmartContract").innerHTML =  "Install Metamask and select Sepolia Testnet to have a Web3 provider to read blockchain data."
-  // }
-  // else{
-  //   document.getElementById("getValueStateSmartContract").innerHTML =  storedDataCallValue
-  // }
+  let getPoolBalanceWethValue = await wethContractInstance.balanceOf(poolPairAddressLinkWeth)
+  if(getPoolBalanceWethValue === undefined){
+    document.getElementById("getPoolBalanceWETH").innerHTML =  "Install Metamask and select Sepolia Testnet to have a Web3 provider to read blockchain data."
+  }
+  else{
+    document.getElementById("getPoolBalanceWETH").innerHTML =  getPoolBalanceWethValue + " WETH"
+  }
+  let getPoolBalanceLinkValue = await await linkContractInstance.balanceOf(poolPairAddressLinkWeth)
+  if(getPoolBalanceLinkValue === undefined){
+    document.getElementById("getPoolBalanceLINK").innerHTML =  "Install Metamask and select Sepolia Testnet to have a Web3 provider to read blockchain data."
+  }
+  else{
+    document.getElementById("getPoolBalanceLINK").innerHTML =  getPoolBalanceLinkValue + " LINK"
+  }
 }
 
 async function addLiquidityTxAsync() {
