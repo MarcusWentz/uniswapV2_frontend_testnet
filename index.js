@@ -5,7 +5,7 @@ detectMetamaskInstalled() //When the page is opened check for error handling iss
 
 let accounts = []; ////Empty array to be filled once Metamask is called.
 document.getElementById("enableEthereumButton").innerHTML =  "Connect Metamask 🦊"
-document.getElementById("getValueStateSmartContract").innerHTML =  "Loading..."
+// document.getElementById("getValueStateSmartContract").innerHTML =  "Loading..."
 
 const baseSepoliaChainId = 84532;
 
@@ -33,7 +33,7 @@ async function getDataOnChainToLoad(){
     getStoredData()
   }
   if(chainIdConnected != baseSepoliaChainId){
-    document.getElementById("getValueStateSmartContract").innerHTML =  "Install Metamask and select Base Sepolia Testnet to have a Web3 provider to read blockchain data."
+    // document.getElementById("getValueStateSmartContract").innerHTML =  "Install Metamask and select Base Sepolia Testnet to have a Web3 provider to read blockchain data."
   }
 
 }
@@ -140,7 +140,7 @@ function detectMetamaskInstalled(){
   }
   catch(missingMetamask) {
      alert("Metamask not detected in browser! Install Metamask browser extension, then refresh page!")
-     document.getElementById("getValueStateSmartContract").innerHTML =  "Install Metamask and select Sepolia Testnet to have a Web3 provider to read blockchain data."
+    //  document.getElementById("getValueStateSmartContract").innerHTML =  "Install Metamask and select Sepolia Testnet to have a Web3 provider to read blockchain data."
 
   }
 
