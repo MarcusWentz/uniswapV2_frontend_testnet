@@ -94,6 +94,30 @@
     font-size: 16px;
 }
 
+.buttonRemoveLiquidityRed {
+    background-color: #000000;
+    color: #c00303;
+    border-style: solid;
+    border-color: #c00303;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.buttonRemoveLiquidityRed:hover {
+    background-color: #c00303;
+    color: #000000;
+    border-style: solid;
+    border-color: #c00303;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 .container {
     position: relative;
     padding: 30px;

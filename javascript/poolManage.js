@@ -45,7 +45,7 @@ async function getStoredData() {
   // }
 }
 
-async function sentTxAsync() {
+async function addLiquidityTxAsync() {
 
   let tokenERC20Address = "0xE4aB69C077896252FAFBD49EFD26B5D171A32410";
   const deadline = BigInt("115792089237316195423570985008687907853269984665640564039457584007913129639935");
@@ -77,6 +77,37 @@ async function sentTxAsync() {
     
 }
 
+async function removeLiquidityTxAsync() {
+
+  let tokenERC20Address = "0xE4aB69C077896252FAFBD49EFD26B5D171A32410";
+  const deadline = BigInt("115792089237316195423570985008687907853269984665640564039457584007913129639935");
+
+  const callDataObject = await contractDefined_JS.populateTransaction.removeLiquidityETH(
+		tokenERC20Address,
+    ethers.utils.hexlify(BigInt("1000")),
+    ethers.utils.hexlify(BigInt("500")),
+    ethers.utils.hexlify(BigInt("500")),
+		accounts[0],
+    ethers.utils.hexlify(deadline), 
+  ); 
+  const txData = callDataObject.data;
+
+  ethereum
+  .request({
+    method: 'eth_sendTransaction',
+    params: [
+      {
+        from: accounts[0],
+        to: contractAddress_JS,
+        data: txData
+      },
+    ],
+  })
+  .then((txHash) => console.log(txHash))
+  .catch((error) => console.error);  
+    
+}
+
 // contractDefined_JS.on("setEvent", () => {
 
 //   getStoredData()
@@ -91,13 +122,23 @@ ethereumButton.addEventListener('click', () => {
 });
 
 // MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
-const changeStateInContractEvent = document.querySelector('.changeStateInContractEvent');
-changeStateInContractEvent.addEventListener('click', () => {
+const addLiquidityContractEvent = document.querySelector('.addLiquidityContractEvent');
+addLiquidityContractEvent.addEventListener('click', () => {
   checkAddressMissingMetamask()
   
-  sentTxAsync()
+  addLiquidityTxAsync()
 
 })
+
+// MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
+const removeLiquidityContractEvent = document.querySelector('.removeLiquidityContractEvent');
+removeLiquidityContractEvent.addEventListener('click', () => {
+  checkAddressMissingMetamask()
+  
+  removeLiquidityTxAsync()
+
+})
+
 
 //If Metamask is not detected the user will be told to install Metamask.
 function detectMetamaskInstalled(){
