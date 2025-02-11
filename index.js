@@ -185,8 +185,8 @@ ethereumButton.addEventListener('click', () => {
 // })
 
 // MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
-const changeStateInContractEvent = document.querySelector('.changeStateInContractEvent');
-changeStateInContractEvent.addEventListener('click', () => {
+const swapTokenForEthContractEvent = document.querySelector('.swapTokenForEthContractEvent');
+swapTokenForEthContractEvent.addEventListener('click', () => {
   checkAddressMissingMetamask()
   
   swapTokenForEthTxAsync()
