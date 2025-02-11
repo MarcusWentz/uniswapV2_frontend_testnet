@@ -175,23 +175,23 @@ ethereumButton.addEventListener('click', () => {
     enableMetamaskOnSepolia()
 });
 
-// // MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
-// const swapEthForTokenContractEvent = document.querySelector('.swapEthForTokenContractEvent');
-// swapEthForTokenContractEvent.addEventListener('click', () => {
-//   checkAddressMissingMetamask()
-  
-//   swapEthForTokenTxAsync()
-
-// })
-
 // MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
-const swapTokenForEthContractEvent = document.querySelector('.swapTokenForEthContractEvent');
-swapTokenForEthContractEvent.addEventListener('click', () => {
+const swapEthForTokenContractEvent = document.querySelector('.swapEthForTokenContractEvent');
+swapEthForTokenContractEvent.addEventListener('click', () => {
   checkAddressMissingMetamask()
   
-  swapTokenForEthTxAsync()
+  swapEthForTokenTxAsync()
 
 })
+
+// // MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
+// const swapTokenForEthContractEvent = document.querySelector('.swapTokenForEthContractEvent');
+// swapTokenForEthContractEvent.addEventListener('click', () => {
+//   checkAddressMissingMetamask()
+  
+//   swapTokenForEthTxAsync()
+
+// })
 
 //If Metamask is not detected the user will be told to install Metamask.
 function detectMetamaskInstalled(){
