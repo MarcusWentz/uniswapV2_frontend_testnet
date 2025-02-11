@@ -175,14 +175,14 @@ ethereumButton.addEventListener('click', () => {
     enableMetamaskOnSepolia()
 });
 
-// MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
-const swapEthForTokenContractEvent = document.querySelector('.swapEthForTokenContractEvent');
-swapEthForTokenContractEvent.addEventListener('click', () => {
-  checkAddressMissingMetamask()
+// // MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
+// const swapEthForTokenContractEvent = document.querySelector('.swapEthForTokenContractEvent');
+// swapEthForTokenContractEvent.addEventListener('click', () => {
+//   checkAddressMissingMetamask()
   
-  swapEthForTokenTxAsync()
+//   swapEthForTokenTxAsync()
 
-})
+// })
 
 // MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
 const changeStateInContractEvent = document.querySelector('.changeStateInContractEvent');
