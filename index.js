@@ -76,8 +76,10 @@ async function swapEthForTokenTxAsync() {
 	const swapPath = [tokenIn,tokenOut];
 	console.log("swapPath: ", swapPath);
 
-	let msgValueInput = 1041;
-	let getAmountsOutReturnArray = await getGetAmountsOut(msgValueInput,swapPath);
+	// let msgValueInput = 1041;
+  let msgValueInput = BigInt(document.getElementById("inputTokenAmount").value);
+  
+ 	let getAmountsOutReturnArray = await getGetAmountsOut(msgValueInput,swapPath);
 	let amountOut = getAmountsOutReturnArray[1];
 	console.log("amountIn getAmountsOutReturnArray[0]: "  + getAmountsOutReturnArray[0])
 	console.log("amountOut getAmountsOutReturnArray[1]: " + amountOut)
