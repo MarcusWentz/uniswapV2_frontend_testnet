@@ -99,6 +99,11 @@ async function addLiquidityTxAsync() {
 
 async function removeLiquidityTxAsync() {
 
+  let inputValueTest = BigInt(document.getElementById("inputTokenAmount").value);
+  let inputValueDouble = BigInt(2)*inputValueTest;
+  console.log(inputValueTest)
+  console.log(inputValueDouble)
+
   let tokenERC20Address = "0xE4aB69C077896252FAFBD49EFD26B5D171A32410";
   const deadline = BigInt("115792089237316195423570985008687907853269984665640564039457584007913129639935");
 
@@ -108,9 +113,9 @@ async function removeLiquidityTxAsync() {
   // https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02#addliquidityeth
   const callDataObject = await contractDefined_JS.populateTransaction.removeLiquidityETH(
 		tokenERC20Address,
-    ethers.utils.hexlify(BigInt("1000")),
-    ethers.utils.hexlify(BigInt("500")),
-    ethers.utils.hexlify(BigInt("500")),
+    inputValueDouble, // ethers.utils.hexlify(BigInt("1000")),
+    inputValueTest, // ethers.utils.hexlify(BigInt("500")),
+    inputValueTest, // ethers.utils.hexlify(BigInt("500")),
 		accounts[0],
     ethers.utils.hexlify(deadline), 
   ); 
