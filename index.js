@@ -222,23 +222,45 @@ ethereumButton.addEventListener('click', () => {
     enableMetamaskOnSepolia()
 });
 
-// MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
-const swapEthForTokenContractEvent = document.querySelector('.swapEthForTokenContractEvent');
-swapEthForTokenContractEvent.addEventListener('click', () => {
-  checkAddressMissingMetamask()
-  
-  swapEthForTokenTxAsync()
+// // MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
+// const swapEthForTokenContractEvent = document.querySelector('.swapEthForTokenContractEvent');
+// swapEthForTokenContractEvent.addEventListener('click', () => {
 
-})
+//   checkAddressMissingMetamask()
+  
+//   swapEthForTokenTxAsync()
+
+// })
 
 // // MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
 // const swapTokenForEthContractEvent = document.querySelector('.swapTokenForEthContractEvent');
 // swapTokenForEthContractEvent.addEventListener('click', () => {
+
 //   checkAddressMissingMetamask()
   
 //   swapTokenForEthTxAsync()
 
 // })
+
+// MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
+const swapButtonClickEvent = document.querySelector('.swapButton');
+swapButtonClickEvent.addEventListener('click', () => {
+
+  checkAddressMissingMetamask()
+
+  let inputTokenName = document.getElementById("inputTokenNameDropDownMenu").value;
+  console.log(inputTokenName)
+
+  if(inputTokenName == "ETH"){
+    console.log("Swap ETH for LINK.")
+    swapEthForTokenTxAsync()
+  }
+  if(inputTokenName == "LINK"){
+    console.log("Swap LINK for ETH.")
+    swapTokenForEthTxAsync()
+  }
+  
+})
 
 //If Metamask is not detected the user will be told to install Metamask.
 function detectMetamaskInstalled(){
