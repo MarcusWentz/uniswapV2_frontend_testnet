@@ -7,7 +7,7 @@ let accounts = []; ////Empty array to be filled once Metamask is called.
 document.getElementById("enableEthereumButton").innerHTML =  "Connect Metamask 🦊"
 // document.getElementById("getValueStateSmartContract").innerHTML =  "Loading..."
 document.getElementById("inputTokenName").value =  "ETH"
-document.getElementById("outputTokenAmount").value =  "0"
+document.getElementById("outputTokenAmount").value =  "Click button 'Swap' for a quote"
 document.getElementById("outputTokenName").value =  "LINK"
 
 
@@ -68,13 +68,15 @@ async function getGetAmountsOut(msgValueInput,swapPath) {
 }
 
 
-// //Event listener in frontend for inputTokenAmount to detect new text inputs.
-// const inputTokenAmountUpdate = document.querySelector('#inputTokenAmount');
-// inputTokenAmountUpdate.addEventListener('input', () => {
-//   let inputValueTest = BigInt(document.getElementById("inputTokenAmount").value);
-//   console.log(inputValueTest.toString())
-//   document.getElementById("outputTokenAmount").value = inputValueTest.toString();
-// });
+//Event listener in frontend for inputTokenAmount to detect new text inputs.
+const inputTokenAmountUpdate = document.querySelector('#inputTokenAmount');
+inputTokenAmountUpdate.addEventListener('input', () => {
+  let inputValueTest = BigInt(document.getElementById("inputTokenAmount").value);
+  console.log(inputValueTest.toString())
+
+  // document.getElementById("outputTokenAmount").value = inputValueTest.toString();
+
+});
 
 async function swapEthForTokenTxAsync() {
 
