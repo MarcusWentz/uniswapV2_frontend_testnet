@@ -93,6 +93,7 @@ async function swapEthForTokenTxAsync() {
 
 	// let msgValueInput = 1041;
   let msgValueInput = BigInt(document.getElementById("inputTokenAmount").value);
+  
   if(msgValueInput.toString() == 0 ){
     alert("inputTokenAmount cannot be 0 or null.")
     return;
@@ -151,9 +152,17 @@ async function swapTokenForEthTxAsync() {
 	const swapPath = [tokenIn,tokenOut];
 	console.log("swapPath: ", swapPath);
 
-	let tokenERC20Input = 1041;
+	// let tokenERC20Input = 1041;
+  let tokenERC20Input = BigInt(document.getElementById("inputTokenAmount").value);
+
+  if(tokenERC20Input.toString() == 0 ){
+    alert("inputTokenAmount cannot be 0 or null.")
+    return;
+  }
+
 	let getAmountsOutReturnArray = await getGetAmountsOut(tokenERC20Input,swapPath);
 	let amountOut = getAmountsOutReturnArray[1];
+  document.getElementById("outputTokenAmount").value = amountOut;
 	console.log("amountIn getAmountsOutReturnArray[0]: "  + getAmountsOutReturnArray[0])
 	console.log("amountOut getAmountsOutReturnArray[1]: " + amountOut)
 
@@ -199,23 +208,23 @@ ethereumButton.addEventListener('click', () => {
     enableMetamaskOnSepolia()
 });
 
-// MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
-const swapEthForTokenContractEvent = document.querySelector('.swapEthForTokenContractEvent');
-swapEthForTokenContractEvent.addEventListener('click', () => {
-  checkAddressMissingMetamask()
-  
-  swapEthForTokenTxAsync()
-
-})
-
 // // MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
-// const swapTokenForEthContractEvent = document.querySelector('.swapTokenForEthContractEvent');
-// swapTokenForEthContractEvent.addEventListener('click', () => {
+// const swapEthForTokenContractEvent = document.querySelector('.swapEthForTokenContractEvent');
+// swapEthForTokenContractEvent.addEventListener('click', () => {
 //   checkAddressMissingMetamask()
   
-//   swapTokenForEthTxAsync()
+//   swapEthForTokenTxAsync()
 
 // })
+
+// MODIFY CONTRACT STATE WITH SET FUNCTION WITH PREDEFINED DATA FROM WEB3.JS
+const swapTokenForEthContractEvent = document.querySelector('.swapTokenForEthContractEvent');
+swapTokenForEthContractEvent.addEventListener('click', () => {
+  checkAddressMissingMetamask()
+  
+  swapTokenForEthTxAsync()
+
+})
 
 //If Metamask is not detected the user will be told to install Metamask.
 function detectMetamaskInstalled(){
