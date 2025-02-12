@@ -21,7 +21,7 @@ const contractDefined_JS = new ethers.Contract(contractAddress_JS, contractABI_J
 
 const wethAddress = '0x4200000000000000000000000000000000000006'
 const linkAddress = '0xE4aB69C077896252FAFBD49EFD26B5D171A32410'
-const ierc20Abi = [{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
+const ierc20Abi = [{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
 
 const wethContractInstance = new ethers.Contract(wethAddress, ierc20Abi, provider);
 const linkContractInstance = new ethers.Contract(linkAddress, ierc20Abi, provider);

@@ -18,15 +18,13 @@ const provider = new ethers.providers.Web3Provider(window.ethereum); //Imported 
 // const signer = provider.getSigner(); //Do this when the user clicks "enableEthereumButton" which will call getAccount() to get the signer private key for the provider.  
  
 const contractAddress_JS = '0x794c842Ef3EE218464068F0FFC4Bc084453CDeDD'
-const contractABI_JS = 
-[{"inputs":[],"name":"WETH","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"}],"name":"getAmountsOut","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForETH","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"}]
+const contractABI_JS = [{"inputs":[],"name":"WETH","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"}],"name":"getAmountsOut","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForETH","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"}]
 const contractDefined_JS = new ethers.Contract(contractAddress_JS, contractABI_JS, provider);
 
 // LINK token address
 const tokenERC20Address = "0xE4aB69C077896252FAFBD49EFD26B5D171A32410"
-
-// const contractDefined_JS = new ethers.Contract(contractAddress_JS, contractABI_JS, signer);
-
+const ierc20Abi = [{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
+const tokenERC20ContractInstance = new ethers.Contract(tokenERC20Address, ierc20Abi, provider);
 
 getDataOnChainToLoad()
 
@@ -67,6 +65,10 @@ async function getGetAmountsOut(msgValueInput,swapPath) {
 	return storedData
 }
 
+async function getApprovalERC20() {  
+	const storedData = await tokenERC20ContractInstance.allowance(accounts[0],contractAddress_JS)
+	return storedData
+}
 
 //Event listener in frontend for inputTokenAmount to detect new text inputs.
 const inputTokenAmountUpdate = document.querySelector('#inputTokenAmount');
@@ -158,9 +160,6 @@ async function swapTokenForEthTxAsync() {
 	let factoryAddress = await getFactoryAddress()
 	console.log("factoryAddress: " + factoryAddress)
 
-	// let approvalERC20 = await getApprovalERC20()
-	// console.log("approvalERC20: " + approvalERC20)
-
 	const tokenIn = tokenERC20Address;
 	const tokenOut = wrappedTokenAddress;
 	const swapPath = [tokenIn,tokenOut];
@@ -168,6 +167,20 @@ async function swapTokenForEthTxAsync() {
 
 	// let tokenERC20Input = 1041;
   let tokenERC20Input = BigInt(document.getElementById("inputTokenAmount").value);
+
+  let approvalERC20 = await getApprovalERC20()
+	console.log("approvalERC20: " + approvalERC20)
+
+  // console.log(tokenERC20Input.toString())
+  // console.log(approvalERC20.toString())
+  // console.log(tokenERC20Input > approvalERC20)
+
+  // 999999999999982677
+
+  if(tokenERC20Input > approvalERC20){
+    alert("Increase your ERC-20 token allowance to the Uniswap Router at address. " + contractAddress_JS + " Error: tokenERC20Input > approvalERC20");
+    return;
+  }
 
   if(tokenERC20Input.toString() == 0 ){
     alert("inputTokenAmount cannot be 0 or null.")
