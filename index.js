@@ -68,16 +68,14 @@ async function getGetAmountsOut(msgValueInput,swapPath) {
 }
 
 
-//Connect to Metamask.
-const inputTokenAmountUpdate = document.querySelector('#inputTokenAmount');
-inputTokenAmountUpdate.addEventListener('input', () => {
-  let inputValueTest = BigInt(document.getElementById("inputTokenAmount").value);
-  console.log(inputValueTest.toString())
-  document.getElementById("outputTokenAmount").value = inputValueTest.toString();
-  
-});
+// //Event listener in frontend for inputTokenAmount to detect new text inputs.
+// const inputTokenAmountUpdate = document.querySelector('#inputTokenAmount');
+// inputTokenAmountUpdate.addEventListener('input', () => {
+//   let inputValueTest = BigInt(document.getElementById("inputTokenAmount").value);
+//   console.log(inputValueTest.toString())
+//   document.getElementById("outputTokenAmount").value = inputValueTest.toString();
+// });
 
- 
 async function swapEthForTokenTxAsync() {
 
   let wrappedTokenAddress = await getWrappedTokenAddress()
@@ -96,6 +94,9 @@ async function swapEthForTokenTxAsync() {
   
  	let getAmountsOutReturnArray = await getGetAmountsOut(msgValueInput,swapPath);
 	let amountOut = getAmountsOutReturnArray[1];
+
+  document.getElementById("outputTokenAmount").value = amountOut;
+ 
 	console.log("amountIn getAmountsOutReturnArray[0]: "  + getAmountsOutReturnArray[0])
 	console.log("amountOut getAmountsOutReturnArray[1]: " + amountOut)
 
