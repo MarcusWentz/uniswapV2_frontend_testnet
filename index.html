@@ -35,14 +35,23 @@
 <div class="container">
   <div class="center">
     <input style="width: 325px;" type="text" style="text-align:center" id="inputTokenAmount" placeholder="input amount">
-    <input style="width: 50px;" type="text" style="text-align:center" id="inputTokenName" placeholder="ETH">
+    <!-- <input style="width: 50px;" type="text" style="text-align:center" id="inputTokenName" placeholder="ETH"> -->
+    <select name="language" id="language">
+      <option value="ETH">ETH</option>
+      <option value="LINK">LINK</option>
+    </select>
   </div>
 </div>
 
 <div class="container">
   <div class="center">
-    <input style="width: 325px;" type="text" style="text-align:center" id="outputTokenAmount" placeholder="output amount">
-    <input style="width: 50px;" type="text" style="text-align:center" id="outputTokenName" placeholder="LINK">
+    <!-- Read only input text. -->
+    <input readonly style="width: 325px;" type="text" style="text-align:center" id="outputTokenAmount" placeholder="output amount">
+    <!-- <input style="width: 50px;" type="text" style="text-align:center" id="outputTokenName" placeholder="LINK"> -->
+    <select name="language" id="language">
+      <option value="LINK">LINK</option>
+      <option value="ETH">ETH</option>
+    </select>
   </div>
 </div>
 
@@ -51,7 +60,7 @@
     <button class="swapEthForTokenContractEvent btn buttonUniswapColorTheme">Swap</button>
   </div>
 </div>
-
+ 
 <!-- <div style="min-height: 5vh"> </div> -->
 
 <!-- <div class="container">
