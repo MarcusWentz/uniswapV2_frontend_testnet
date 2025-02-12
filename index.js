@@ -93,6 +93,10 @@ async function swapEthForTokenTxAsync() {
 
 	// let msgValueInput = 1041;
   let msgValueInput = BigInt(document.getElementById("inputTokenAmount").value);
+  if(msgValueInput.toString() == 0 ){
+    alert("inputTokenAmount cannot be 0 or null.")
+    return;
+  }
   
  	let getAmountsOutReturnArray = await getGetAmountsOut(msgValueInput,swapPath);
 	let amountOut = getAmountsOutReturnArray[1];
