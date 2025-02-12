@@ -21,14 +21,5 @@ interface IUniswapV2Router01Liquidity {
         uint deadline
     ) external returns (uint amountToken, uint amountETH);
  
-    function swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline)
-        external
-        payable
-        returns (uint[] memory amounts);
- 
-    function swapExactTokensForETH(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline)
-        external
-        returns (uint[] memory amounts);
-
 }
  

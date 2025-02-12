@@ -62,15 +62,20 @@ async function getStoredData() {
 
 async function addLiquidityTxAsync() {
 
+  let inputValueTest = BigInt(document.getElementById("inputTokenAmount").value);
+  let inputValueDouble = BigInt(2)*inputValueTest;
+  console.log(inputValueTest)
+  console.log(inputValueDouble)
+
   let tokenERC20Address = "0xE4aB69C077896252FAFBD49EFD26B5D171A32410";
   const deadline = BigInt("115792089237316195423570985008687907853269984665640564039457584007913129639935");
 
   const callDataObject = await contractDefined_JS.populateTransaction.addLiquidityETH(
 		tokenERC20Address,
-    ethers.utils.hexlify(BigInt("2000")),
-    ethers.utils.hexlify(BigInt("1000")),
-    ethers.utils.hexlify(BigInt("1000")),
-		accounts[0],
+    inputValueDouble, // ethers.utils.hexlify(BigInt("2000")),
+    inputValueTest, // ethers.utils.hexlify(BigInt("1000")),
+    inputValueTest, // ethers.utils.hexlify(BigInt("1000")),
+    accounts[0],
     ethers.utils.hexlify(deadline), 
 	);
   const txData = callDataObject.data;
@@ -83,7 +88,7 @@ async function addLiquidityTxAsync() {
         from: accounts[0],
         to: contractAddress_JS,
         data: txData,
-        value: ethers.utils.hexlify(BigInt("2000")),
+        value: ethers.utils.hexlify(inputValueTest), //         value: ethers.utils.hexlify(BigInt("2000")),
       },
     ],
   })
@@ -97,6 +102,10 @@ async function removeLiquidityTxAsync() {
   let tokenERC20Address = "0xE4aB69C077896252FAFBD49EFD26B5D171A32410";
   const deadline = BigInt("115792089237316195423570985008687907853269984665640564039457584007913129639935");
 
+  // Note:
+  // amountETHMin <= msg.value
+  // must be true or else it may cause addLiquidityETH to revert. 
+  // https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02#addliquidityeth
   const callDataObject = await contractDefined_JS.populateTransaction.removeLiquidityETH(
 		tokenERC20Address,
     ethers.utils.hexlify(BigInt("1000")),
