@@ -6,6 +6,7 @@ detectMetamaskInstalled() //When the page is opened check for error handling iss
 let accounts = []; ////Empty array to be filled once Metamask is called.
 document.getElementById("enableEthereumButton").innerHTML =  "Connect Metamask 🦊"
 // document.getElementById("getValueStateSmartContract").innerHTML =  "Loading..."
+document.getElementById("outputTokenAmount").value =  "0"
 
 const baseSepoliaChainId = 84532;
 
@@ -63,6 +64,17 @@ async function getGetAmountsOut(msgValueInput,swapPath) {
 	return storedData
 }
 
+
+//Connect to Metamask.
+const inputTokenAmountUpdate = document.querySelector('#inputTokenAmount');
+inputTokenAmountUpdate.addEventListener('input', () => {
+  let inputValueTest = BigInt(document.getElementById("inputTokenAmount").value);
+  console.log(inputValueTest.toString())
+  document.getElementById("outputTokenAmount").value = inputValueTest.toString();
+  
+});
+
+ 
 async function swapEthForTokenTxAsync() {
 
   let wrappedTokenAddress = await getWrappedTokenAddress()
