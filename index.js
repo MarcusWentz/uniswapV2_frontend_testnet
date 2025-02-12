@@ -8,7 +8,7 @@ document.getElementById("enableEthereumButton").innerHTML =  "Connect Metamask ð
 // document.getElementById("getValueStateSmartContract").innerHTML =  "Loading..."
 // document.getElementById("inputTokenName").value =  "ETH"
 document.getElementById("outputTokenAmount").value =  "Click button 'Swap' for a quote"
-// document.getElementById("outputTokenName").value =  "LINK"
+document.getElementById("outputTokenName").value =  "LINK"
 
 
 const baseSepoliaChainId = 84532;
@@ -76,6 +76,20 @@ inputTokenAmountUpdate.addEventListener('input', () => {
 
   // document.getElementById("outputTokenAmount").value = inputValueTest.toString();
 
+});
+ 
+const inputTokenNameDropDownMenuUpdate = document.querySelector('#inputTokenNameDropDownMenu');
+inputTokenNameDropDownMenuUpdate.addEventListener('change', function() {
+  const selectedValue = inputTokenNameDropDownMenuUpdate.value;
+  // Perform actions based on the selected value
+  console.log('Selected token name from drop down menu:', selectedValue);
+
+  if(selectedValue == "ETH"){
+    document.getElementById("outputTokenName").value =  "LINK"
+  } 
+  if(selectedValue != "ETH"){
+    document.getElementById("outputTokenName").value =  "ETH"
+  }
 });
 
 async function swapEthForTokenTxAsync() {
