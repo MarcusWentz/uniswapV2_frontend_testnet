@@ -14,7 +14,7 @@ https://github.com/MarcusWentz/uniswapV2_foundry_deployment
 
 ## Node.js scripts 
 
-https://github.com/MarcusWentz/Web3_Get_Set_Contract_Metamask/tree/main/Scripts/javascript/shardeum_testing/UniswapV2/UniswapV2Router02
+https://github.com/MarcusWentz/Web3_Get_Set_Contract_Metamask/tree/main/Scripts/javascript/uniswap/UniswapV2/UniswapV2Router02
 
 ## Run frontend locally for testing
 
