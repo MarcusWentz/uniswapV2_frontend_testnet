@@ -18,7 +18,6 @@ https://github.com/MarcusWentz/Web3_Get_Set_Contract_Metamask/tree/main/Scripts/
 
 ## Run frontend locally for testing
 
-⚠️ Node.js version v16.14.2 is recommended to avoid errors running the website locally. ⚠️
 ```shell
 npm install http-server
 ```
