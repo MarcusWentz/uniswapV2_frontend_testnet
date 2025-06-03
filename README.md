@@ -6,7 +6,7 @@ Simple vanilla Javascript frontend for Uniswap V2 swaps and pool interactions on
 
 ## GitHub Pages Hosted Link
 
-https://marcuswentz.github.io/uniswapv2_frontend_testnet/
+https://marcuswentz.github.io/uniswapV2_frontend_testnet/
 
 ## Uniswap V2 Fonudry Deployed Contracts And Guide
 
